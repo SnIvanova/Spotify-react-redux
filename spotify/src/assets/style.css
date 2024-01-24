@@ -134,7 +134,7 @@ body {
   /*MAIN PAGE SECTION*/
   
   .mainLinks {
-    margin-top: 1.5rem;
+    margin-top: 1rem;
     justify-content: space-evenly;
   }
   
@@ -166,11 +166,10 @@ body {
   #searchResults {
     color: white;
     font-weight: 700;
-    padding-top: 50px;
   }
   
   #hipHopSection {
-    margin-bottom: 7rem;
+    margin-bottom: 10rem;
   }
   
   .mainPage img {

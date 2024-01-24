@@ -1,14 +1,37 @@
-import { Col, Row } from "react-bootstrap";
+import React from "react";
+import { Col, Nav, NavItem } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export const TopLinks = () => (
-  <Row className="mb-3">
-    <Col xs={9} lg={11} className="mainLinks d-none d-md-flex p-1">
-      <Link to="/">TRENDING</Link>
-      <Link to="/">PODCAST</Link>
-      <Link to="/">MOODS AND GENRES</Link>
-      <Link to="/">NEW RELEASES</Link>
-      <Link to="/">DISCOVER</Link>
-    </Col>
-  </Row>
+const TopLinks = () => (
+  <Col xs={12} lg={10} className="mainLinks d-none d-md-flex p-1">
+    <Nav>
+      <NavItem as="span">
+        <Link to="/" className="nav-link">
+          TRENDING
+        </Link>
+      </NavItem>
+      <NavItem as="span">
+        <Link to="/" className="nav-link">
+          PODCAST
+        </Link>
+      </NavItem>
+      <NavItem as="span">
+        <Link to="/" className="nav-link">
+          MOODS AND GENRES
+        </Link>
+      </NavItem>
+      <NavItem as="span">
+        <Link to="/" className="nav-link">
+          NEW RELEASES
+        </Link>
+      </NavItem>
+      <NavItem as="span">
+        <Link to="/" className="nav-link">
+          DISCOVER
+        </Link>
+      </NavItem>
+    </Nav>
+  </Col>
 );
+
+export default TopLinks;

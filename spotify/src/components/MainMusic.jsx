@@ -1,57 +1,59 @@
-import { Col, Row } from "react-bootstrap"
-import SearchResult from "./SearchResult"
-import { useSelector } from "react-redux"
-import AlbumHome from "./AlbumHome"
+import React, { useEffect } from "react";
+import { Col, Row } from "react-bootstrap";
+import SearchResult from "./SearchResult";
+import AlbumHome from "./AlbumHome";
+import TopLinks from "./TopLinks";
+import { useSelector, useDispatch } from "react-redux";
+import { getAlbum } from "../redux/action";
+import { CATEGORIES } from "./Categories";
 
-import { TopLinks } from "./TopLinks";
+// Function to fetch albums for each category
+const fetchAlbums = (dispatch, categories) => {
+  categories.forEach(({ name, artistList, seed }) => {
+    dispatch(getAlbum(artistList[0], name));
+  });
+};
 
+// Component to render main music page
 const MainMusic = () => {
-  const search = useSelector((state) => state.search.search)
-  
+  const search = useSelector((state) => state.search.search);
+  const dispatch = useDispatch();
+
+  // Fetch albums on component mount
+  useEffect(() => {
+    fetchAlbums(dispatch, CATEGORIES);
+  }, [dispatch]);
+
+  // Render main music page
   return (
     <Col xs={12} md={9} className="offset-md-3 mainPage">
       <Row>
         <Col xs={9} lg={11} className="mainLinks d-none d-md-flex">
-        <TopLinks />
+          <TopLinks />
         </Col>
       </Row>
       <Row>
         <Col xs={10}>
-          <div
-            id="searchResults"
-            style={{ display: search.length !== 0 ? "block" : "none" }}
-          >
-            <h2>Search Result</h2>
-            <SearchResult />
-          </div>
+          {search.length !== 0 && (
+            <div id="searchResults">
+              <h2>Search Result</h2>
+              <SearchResult />
+            </div>
+          )}
         </Col>
       </Row>
-      <Row>
-        <Col xs={10}>
-          <div id="rock">
-            <h2>Rock</h2>
-            <AlbumHome artistName={"queen"} />
-          </div>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={10}>
-          <div id="pop">
-            <h2>Pop Culture</h2>
-            <AlbumHome artistName={"madonna"} />
-          </div>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={10}>
-          <div id="hiphop">
-            <h2>HipHop</h2>
-            <AlbumHome artistName={"eminem"} />
-          </div>
-        </Col>
-      </Row>
+      {CATEGORIES.map(({ name, artistList, seed }) => (
+        <Row key={`${name}-${artistList.join(",")}`}>
+          <Col xs={10}>
+            <div id={name.toLowerCase()} className="category-section">
+              <h2>{name}</h2>
+              <AlbumHome category={name} seed={seed} />
+            </div>
+          </Col>
+        </Row>
+      ))}
     </Col>
-  )
-}
+  );
+};
 
-export default MainMusic
+export default MainMusic;

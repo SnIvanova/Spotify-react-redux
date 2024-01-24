@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Button, Col, Row } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { TopLinks } from "./TopLinks";
+import  TopLinks  from "./TopLinks";
 import { getAlbum } from "../redux/action"
 
 const ArtistPage = ({ artistName }) => {
@@ -30,6 +30,7 @@ const ArtistPage = ({ artistName }) => {
 
   return (
     <>
+
       <Col className="col-12 col-md-9 offset-md-3 mainPage">
         <TopLinks />
 

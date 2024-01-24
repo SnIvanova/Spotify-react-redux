@@ -37,36 +37,34 @@ export const getSearch = (searchValue) => {
     }
 }
 
-export const getAlbum = (artistName) => {
+export const getAlbum = (artistName, category) => {
     return async (dispatch) => {
-        try {
-            const res = await fetch(
-                "https://striveschool-api.herokuapp.com/api/deezer/search?q=" +
-                artistName,
-                {
-                    headers: {
-                        "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
-                        "X-RapidAPI-Key":
-                            "aa2890f940msh2306372c5602516p1f7ae5jsnd0d7be2f4c19",
-                    },
-                }
-            )
-            if (res.ok) {
-                const data = await res.json()
-                console.log(data)
-                dispatch({
-                    type: ALBUM_HOME,
-                    payload: data.data,
-
-                })
-            } else {
-                throw new Error("ops ricerca non trovata!")
-            }
-        } catch (error) {
-            console.log("errore", error)
+      try {
+        const res = await fetch(
+          "https://striveschool-api.herokuapp.com/api/deezer/search?q=" +
+            artistName,
+          {
+            headers: {
+              "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
+              "X-RapidAPI-Key":
+                "aa2890f940msh2306372c5602516p1f7ae5jsnd0d7be2f4c19",
+            },
+          }
+        );
+        if (res.ok) {
+          const data = await res.json();
+          dispatch({
+            type: ALBUM_HOME,
+            payload: { data: data.data, category: category }, // Include category information
+          });
+        } else {
+          throw new Error("Ops ricerca non trovata!");
         }
-    }
-}
+      } catch (error) {
+        console.log("Errore", error);
+      }
+    };
+  };
 
 export const setPlayer = (selectedAlbum) => (
     {
@@ -82,10 +80,3 @@ export const addFavouriteAction = (title) => {
     };
   };
     
-
-// export const removeFavAction = (data) => {
-//     return {
-//         type: REMOVE_FAV_COM,
-//         payload: data,
-//     }
-// }
