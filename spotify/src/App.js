@@ -19,7 +19,7 @@ function App() {
     <BrowserRouter>
     <Routes>
         <Route path="/" element={<MainMusic />} />
-        <Route path="/album/:artistName" element={<AlbumHome />} />
+        <Route path="/album/:category/:seed" element={<AlbumHome />} />
          <Route path="/artist/:id" element={<ArtistPage />} /> 
     </Routes>
   </BrowserRouter>
