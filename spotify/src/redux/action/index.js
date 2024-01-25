@@ -55,7 +55,7 @@ export const getAlbum = (artistName, category) => {
           const data = await res.json();
           dispatch({
             type: ALBUM_HOME,
-            payload: { data: data.data, category: category }, // Include category information
+            payload: { data: data.data, category: category }, 
           });
         } else {
           throw new Error("Ops ricerca non trovata!");
