@@ -1,9 +1,9 @@
 import { Col, Container, Row } from "react-bootstrap";
 import Sidebar from "./Sidebar";
 import Player from "./Player";
-import MainArtist from "./MainArtist";
+import MainAlbum from "./MainAlbum";
 
-const Artist = () => {
+const Album = () => {
   return (
     <Container fluid>
       <Row>
@@ -11,7 +11,7 @@ const Artist = () => {
           <Sidebar />
         </Col>
         <Col xs={12} md={9} className="offset-md-3 mainPage">
-          <MainArtist />
+          <MainAlbum />
         </Col>
       </Row>
       <Player />
@@ -19,4 +19,4 @@ const Artist = () => {
   );
 };
 
-export default Artist;
+export default Album;

@@ -1,32 +1,25 @@
-import { Container } from 'react-bootstrap';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css'
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import './assets/style.css'
-import MyNav from './components/Nav';
-import MainMusic from './components/MainMusic';
-import PlayBar from './components/PlayBar';
-import AlbumHome from './components/AlbumHome'; 
- import ArtistPage from './components/Artist'; 
-
+import "./App.css";
+import Home from "./components/Home";
+import Album from "./components/Album";
+import Artist from "./components/Artist";
+import ListenedMusic from './components/ListenedMusic';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <>
-    <Container>
-    <MyNav />
-    <BrowserRouter>
-    <Routes>
-        <Route path="/" element={<MainMusic />} />
-        <Route path="/album/:category/:seed" element={<AlbumHome />} />
-         <Route path="/artist/:id" element={<ArtistPage />} /> 
-    </Routes>
-  </BrowserRouter>
-  <PlayBar />
-  </Container>
-  </>
-);
+    <div className="App">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/album/:id" element={<Album />} />
+          <Route path="/artist/:id" element={<Artist />} />
+          <Route path="/your-library" element={<ListenedMusic/>} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 }
 
 export default App;

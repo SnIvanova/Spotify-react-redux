@@ -1,37 +1,18 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
-import { encryptTransform } from "redux-persist-transform-encrypt";
-import searchReducer from "../reducers/search";
-import albumReducer from "../reducers/album";
-import playerReducer from "../reducers/player";
-import favReducer from "../reducers/favourite";
-
-const persistConfig = {
-    key: "root",
-    storage,
-    transforms: [
-      encryptTransform({
-        secretKey: process.env.REACT_APP_PERSISTSECRET || "fallback-secret-key"
-      })
-    ]
-  };
+import homeReducer from "../reducers/homeReducer";
+import albumReducer from "../reducers/albumReducer";
+import artistReducer from "../reducers/artistReducer";
+import listenedSongsReducer from '../reducers/listenedSongsReducer';
 
 const rootReducer = combineReducers({
-    search: searchReducer,
-    album: albumReducer,
-    player: playerReducer,
-    fav: favReducer,
-})
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-export const store = configureStore({
-    reducer: persistedReducer,
-    middleware: getDefaultMiddleware =>
-    getDefaultMiddleware({
-      serializableCheck: false
-    })
+  home: homeReducer,
+  album: albumReducer,
+  artist: artistReducer,
+  listenedSongs: listenedSongsReducer,
 });
 
-export const persistor = persistStore(store);
+const store = configureStore({
+  reducer: rootReducer
+});
+
+export default store;
