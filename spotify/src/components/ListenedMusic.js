@@ -1,18 +1,59 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link} from "react-router-dom";
-import { Button, Col, Row, Container } from "react-bootstrap";
-import Sidebar from "./Sidebar";
-import Player from "./Player";
-
+import { Link } from 'react-router-dom';
+import { Col, Row, Container, Spinner, Card } from 'react-bootstrap';
+import Sidebar from './Sidebar';
+import Player from './Player';
 
 const ListenedMusic = () => {
-  const listenedSongs = useSelector((state) => state.listenedSongs.listenedSongs);
-//console.log(listenedSongs);
+  const recentlyListenedSongs = useSelector((state) => state.listenedSongs.listenedSongs);
+  const isLoading = useSelector((state) => state.listenedSongs.loading);
+
+  const renderListenedSongs = () => {
+    if (isLoading) {
+      return (
+        <div className="text-center">
+          <Spinner animation="border" role="status" variant="primary" />
+          <p>Loading...</p>
+        </div>
+      );
+    }
+
+    if (recentlyListenedSongs.length === 0) {
+      return <p>No songs listened recently.</p>;
+    }
+
+    return (
+      <Row xs={1} md={2} lg={3} className="g-4">
+        {recentlyListenedSongs.map((song, index) => (
+          <Col key={index} className="mb-3">
+            <Card className="h-100">
+              <div
+                className="card-image"
+                style={{
+                backgroundImage: song.photo ? `url(${song.photo})` : 'none',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                height: '200px', 
+                borderRadius: '8px'
+                }}
+              />
+            <Card.Body className="">
+          <Card.Title >{song.title}</Card.Title>
+          <Card.Text>{song.artist}</Card.Text>
+        </Card.Body>
+      </Card>
+    </Col>
+  ))}
+</Row>
+
+    );
+  };
+
   return (
-    <>
-    <Row className="mb-3">
-        <Col className="col-9 col-lg-11 mainLinks d-none d-md-flex">
+    <Container fluid>
+      <Row className="mb-3">
+        <Col className="col-12 mainLinks d-flex justify-content-space-evenly">
           <Link to="/">TRENDING</Link>
           <Link to="/">PODCAST</Link>
           <Link to="/">MOODS AND GENRES</Link>
@@ -20,31 +61,23 @@ const ListenedMusic = () => {
           <Link to="/">DISCOVER</Link>
         </Col>
       </Row>
-      <Container fluid>
-      <Row>
+
+      <Row md={4} lg={10}className="">
         <Col xs={2}>
           <Sidebar />
         </Col>
 
-        <Col xs={12} md={9} className="offset-md-3 mainPage">
-        <div>
-      <h3>Recently Listened</h3>
-      <ul>
-        {listenedSongs.map((song, index) => (
-          <li key={index}>
-            {song.title} by {song.artist}
-          </li>
-        ))}
-      </ul>
-    </div>
+        <Col xs={12} md={9} className="mainPage">
+          <div className="recently-listened-container">
+            <h3 className="m-4 text-white">Recently Listened</h3>
+            {renderListenedSongs()}
+          </div>
         </Col>
       </Row>
+
       <Player />
     </Container>
-
-    </>
   );
-  
 };
 
 export default ListenedMusic;

@@ -39,12 +39,15 @@ const Player = () => {
           return newProgress;
         });
         setCurrentTime((prevTime) => prevTime + 1)}, 1000);
+        if (selectedSong.album && selectedSong.artist) {
         setListenedSongs((prevListenedSongs) => [
           ...prevListenedSongs,
           {
             title: selectedSong.title,
             artist: selectedSong.artist.name,
-          },]);
+            photo: selectedSong.album.cover_medium,
+          }
+          ,])};
     } else {
       clearInterval(interval);
     }
@@ -58,6 +61,7 @@ const Player = () => {
     dispatch(addToListenedSongs({
       title: selectedSong.title,
       artist: selectedSong.artist.name,
+      photo: selectedSong.album.cover_medium,
     }));
   };
 
