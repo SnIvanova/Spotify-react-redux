@@ -6,8 +6,8 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 const Canzone = ({ song }) => {
   const dispatch = useDispatch();
-  const favourite = useSelector(state => state.home.favourite);
-  const isFavourite = favourite.some(favSong => favSong.id === song.id);
+  const favourite = useSelector((state) => state.home.favourite);
+  const isFavourite = favourite.some((favSong) => favSong.id === song.id);
   return (
     <Col className="col-sm-auto col-md-auto text-center mb-5">
       <a href="#i" onClick={() => dispatch(getSelectedSong(song))}>

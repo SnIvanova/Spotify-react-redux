@@ -8,6 +8,28 @@ import Player from './Player';
 const ListenedMusic = () => {
   const recentlyListenedSongs = useSelector((state) => state.listenedSongs.listenedSongs);
   const isLoading = useSelector((state) => state.listenedSongs.loading);
+  //const favouriteSongs = useSelector((state) => state.home.favourite);
+
+  const renderSongCard = (song) => (
+    <Col key={song.id} className="mb-3">
+      <Card className="h-100">
+        <div
+          className="card-image"
+          style={{
+            backgroundImage: song.photo ? `url(${song.photo})` : 'none',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            height: '200px',
+            borderRadius: '8px',
+          }}
+        />
+        <Card.Body>
+          <Card.Title>{song.title}</Card.Title>
+          <Card.Text>{song.artist}</Card.Text>
+        </Card.Body>
+      </Card>
+    </Col>
+  );
 
   const renderListenedSongs = () => {
     if (isLoading) {
@@ -25,28 +47,8 @@ const ListenedMusic = () => {
 
     return (
       <Row xs={1} md={2} lg={3} className="g-4">
-        {recentlyListenedSongs.map((song, index) => (
-          <Col key={index} className="mb-3">
-            <Card className="h-100">
-              <div
-                className="card-image"
-                style={{
-                backgroundImage: song.photo ? `url(${song.photo})` : 'none',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                height: '200px', 
-                borderRadius: '8px'
-                }}
-              />
-            <Card.Body className="">
-          <Card.Title >{song.title}</Card.Title>
-          <Card.Text>{song.artist}</Card.Text>
-        </Card.Body>
-      </Card>
-    </Col>
-  ))}
-</Row>
-
+        {recentlyListenedSongs.map((song) => renderSongCard(song))}
+      </Row>
     );
   };
 
@@ -62,7 +64,7 @@ const ListenedMusic = () => {
         </Col>
       </Row>
 
-      <Row md={4} lg={10}className="">
+      <Row md={4} lg={10} className="">
         <Col xs={2}>
           <Sidebar />
         </Col>
@@ -73,6 +75,13 @@ const ListenedMusic = () => {
             {renderListenedSongs()}
           </div>
         </Col>
+
+      {/*   <Col>
+          <h2>Your Favorites</h2>
+          <Row xs={1} md={2} lg={3} className="g-4">
+            {favouriteSongs.map(renderSongCard)}
+          </Row>
+        </Col> */}
       </Row>
 
       <Player />

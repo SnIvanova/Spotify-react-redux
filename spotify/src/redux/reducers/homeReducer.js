@@ -1,5 +1,6 @@
 import {
   GET_FAVOURITE,
+  REMOVE_FAVOURITE,
   GET_HIP_HOP,
   GET_POP,
   GET_QUERY,
@@ -57,10 +58,18 @@ const homeReducer = (state = initialState, action) => {
         selectedSong: action.payload
       };
     case GET_FAVOURITE:
+      console.log('New state:', state);
       return {
         ...state,
         favourite: [...state.favourite, action.payload]
       };
+
+      case REMOVE_FAVOURITE:
+        return {
+          ...state,
+          favourite: state.favourite.filter(song => song.id !== action.payload.id), 
+        };
+
     default:
       return state;
   }

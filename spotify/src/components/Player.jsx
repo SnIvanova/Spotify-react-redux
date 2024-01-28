@@ -30,7 +30,7 @@ const Player = () => {
       interval = setInterval(() => {
         
         setProgress((prevProgress) => {
-          const newProgress = prevProgress + (1 / selectedSong.duration) * 100; // Adjust based on song duration
+          const newProgress = prevProgress + (1 / selectedSong.duration) * 100; 
           if (newProgress >= 100) {
             setPlaying(false);
             clearInterval(interval);

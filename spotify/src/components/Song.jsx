@@ -6,8 +6,8 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 const Song = ({ song }) => {
   const dispatch = useDispatch();
-  const favourite = useSelector(state => state.home.favourite);
-  const isFavourite = favourite.some(favSong => favSong.id === song.id);
+  const favourite = useSelector((state) => state.home.favourite);
+  const isFavourite = favourite.some((favSong) => favSong.id === song.id);
 
   return (
     <>
