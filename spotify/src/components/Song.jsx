@@ -15,13 +15,17 @@ const Song = ({ song }) => {
         <Image fluid src={song.album.cover_medium} alt={song.album.title} />
       </Link>
 
-      <p>
-        <Link className="text-decoration-none" to={`/album/${song.album.id}`}>
-          Album: {song.album.title} <br />
-        </Link>
-        <Link className="text-decoration-none" to={`/artist/${song.artist.id}`}>
+      <div> 
+
+        <Link className="text-decoration-none text-white fs-5" to={`/artist/${song.artist.id}`}>
           Artist: {song.artist.name}{" "}
+          <br />
         </Link>
+        <Link className="text-decoration-none text-white fs-6" to={`/album/${song.album.id}`}>
+          Album: {song.album.title} 
+          <br />
+        </Link>
+       
         <Button
           onClick={() => dispatch(getFavouriteAction(song))}
           size="sm"
@@ -30,7 +34,7 @@ const Song = ({ song }) => {
         >
           {isFavourite ? <FaHeart /> : <FaRegHeart />}
         </Button>
-      </p>
+      </div>
     </>
   );
 };

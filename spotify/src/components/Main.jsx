@@ -67,7 +67,7 @@ const Main = () => {
               {rockSongs.length > 0 && (
                 <>
                   {rockSongs.slice(0, 4).map(song => (
-                    <Col key={song.id} className="text-center" id="id">
+                    <Col key={song.id} className="text-center " id="id">
                       <Song song={song} />
                     </Col>
                   ))}

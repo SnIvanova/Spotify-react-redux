@@ -15,21 +15,22 @@ const Tracks = ({ song }) => {
   const formattedDuration = `${Math.floor(song.duration / 60)}:${String(song.duration % 60).padStart(2, "0")}`;
 
   return (
-    <div className="py-3 trackHover" onClick={handleSelectSong}>
-      <a href="#i" className="card-title trackHover px-3" style={{ color: "white" }}>
-        {song.title}{" "}
+    <div className="track-container">
+      <div className="track-info" onClick={handleSelectSong}>
+        <span className="track-title text-white">{song.title}</span>
         <Button
           onClick={handleToggleFavourite}
           size="sm"
-          variant="outline-secondary"
-          className="px-2 py-1 pb-2"
+          variant={isFavourite ? "danger" : "outline-secondary"}
+          className="favorite-button m-1"
         >
           {isFavourite ? <FaHeart /> : <FaRegHeart />}
         </Button>
-      </a>
-      <small className="duration" style={{ color: "white" }}>
-        {formattedDuration}
-      </small>
+        <div className="track-duration">{formattedDuration}</div>
+      </div>
+      <div className="album-image">
+        <img src={song.album.cover_medium} alt={song.title} />
+      </div>
     </div>
   );
 };
